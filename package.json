@@ -1,0 +1,36 @@
+{
+  "name": "hettetna",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --import ./tests/register.mjs --test \"tests/*.test.mts\"",
+    "deps:update": "node scripts/safe-dependency-update.mjs"
+  },
+  "dependencies": {
+    "next": "^16.4.3",
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.9",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "allowScripts": {
+    "unrs-resolver@1.12.2": true
+  }
+}

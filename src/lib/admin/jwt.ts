@@ -1,0 +1,18 @@
+/** Reads the `exp` claim WITHOUT verifying the signature. Used only to decide when to refresh. */
+export function jwtExpiry(token: string): number | null {
+  const part = token.split(".")[1];
+  if (!part) return null;
+  try {
+    const base64 = part.replace(/-/g, "+").replace(/_/g, "/");
+    const padded = base64.padEnd(Math.ceil(base64.length / 4) * 4, "=");
+    const payload = JSON.parse(atob(padded)) as { exp?: unknown };
+    return typeof payload.exp === "number" ? payload.exp : null;
+  } catch {
+    return null;
+  }
+}
+
+export function isExpiringSoon(token: string, skewSeconds = 60, now = Date.now()): boolean {
+  const exp = jwtExpiry(token);
+  return exp === null || exp * 1000 - now < skewSeconds * 1000;
+}
