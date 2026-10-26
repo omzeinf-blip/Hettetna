@@ -78,7 +78,7 @@ export async function logoutAction(): Promise<void> {
 type Kind = "properties" | "projects";
 
 function refresh(kind: Kind) {
-  revalidateTag(kind);
+  revalidateTag(kind, "max");
   revalidatePath(kind === "properties" ? "/properties" : "/projects");
   revalidatePath("/");
   revalidatePath("/sitemap.xml");
@@ -247,7 +247,7 @@ export async function saveSettingsAction(_prev: FormState, formData: FormData): 
   } catch (error) {
     return { message: describeDbError(error) };
   }
-  revalidateTag("contact");
+  revalidateTag("contact", "max");
   revalidatePath("/", "layout");
   return { ok: true, message: "تم حفظ بيانات التواصل." };
 }
